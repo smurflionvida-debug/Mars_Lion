@@ -12,7 +12,7 @@ active_size = 0
 active_color = (255, 0, 0)
 screen = pygame.display.set_mode([WIDTH, Height])
 pygame.display.set_caption('Paint!')
-
+painting = []
 
 def draw_menu():
   pygame.draw.rect(screen, (0, 127, 127), [0, 0, WHITH, 100])
@@ -34,6 +34,10 @@ def draw_menu():
   color_rect = [blue, pink, cyan, green, white, black, yellow, red]
   rgb_list = [(0, 0, 255), (255, 0, 255), (0, 255, 255), (255, 255, 255), (0, 0, 0), (255, 255, 0), (255, ,0 ,0)]
   return brush_list, color_rect, rgb_list
+
+def draw_painting(paints):
+  for i in range (len(paints)):
+    pygame.draw.circle(screen, paint[i][0], paints[i][1], paints[i][2])
   
 
 run = True 
@@ -41,10 +45,14 @@ while run:
   timer.tick(fps)
   screen.fill(0, 255, 255)
   mouse = pygame.mouse.get_pos()
+  left_click = pygame.mouse.get_pressed()[0]
   if mouse[1] > 100:
-    pygame.draw.circle(screen, active_color, mouse active_size)
+    pygame.draw.circle(screen, active_color, mouse, active_size)
+  if left_click and mouse[1] > 100:
+    painting.append((active_color, mouse, active_size))
+  draw_painting(painting)
   brushes, colors, rgbs = draw_menu()
-  
+    
   for event in pygame.event.get():
      if event.type == pygame.QUIT:
         run = False
@@ -60,3 +68,4 @@ while run:
          
   Pygame.display.flip()
 Pygame.quit()
+#Mars
